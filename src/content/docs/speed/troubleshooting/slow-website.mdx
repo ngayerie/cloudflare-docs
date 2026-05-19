@@ -279,8 +279,14 @@ MTR combines traceroute and ping to show latency and packet loss at each network
 <TabItem label="macOS/Linux">
 
 ```bash
-mtr -rw www.example.com
+sudo mtr -rwz www.example.com
 ```
+
+:::note
+On macOS, `mtr` requires `sudo` to send ICMP packets. You can install it via [Homebrew](https://formulae.brew.sh/formula/mtr): `brew install mtr`.
+:::
+
+The `-z` flag displays the AS number for each hop, helping identify which network is responsible for latency or packet loss.
 
 </TabItem>
 <TabItem label="Windows">
@@ -302,7 +308,7 @@ For more details, refer to [How to read MTR](https://www.cloudflare.com/learning
 If you have access to your origin server, run MTR from the origin to a [Cloudflare IP address](https://www.cloudflare.com/ips/) to test the network path between your origin and Cloudflare.
 
 ```bash
-mtr -rw 104.16.132.229
+sudo mtr -rwz 104.16.132.229
 ```
 
 High latency or packet loss on this path affects all requests that miss the cache.
